@@ -1,0 +1,14 @@
+clients:
+  - name: "github"
+    callback: "http://127.0.0.1:8080/test"
+    options:
+      flow: AUTH_CODE
+      clientID: ""
+      clientSecret: ""
+      clientSite: "https://github.com/login"
+      tokenPath: "/oauth/access_token"
+      authorizationPath: "/oauth/authorize"
+      userInfoPath: "https://api.github.com/user"
+      scopeSeparator: " "
+      headers:
+        - User-Agent: "vertx-auth-oauth2"
