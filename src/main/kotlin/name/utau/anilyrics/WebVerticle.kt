@@ -16,6 +16,7 @@ class WebVerticle : AbstractVerticle() {
     private val internalCoroutineScope by lazy { CoroutineScope(SupervisorJob()+vertx.dispatcher()) }
 
     override fun start(startPromise: Promise<Void>?) {
+/*
         newRouteMap(vertx).also { httpServer.requestHandler(it);context.put(it) }
         httpServer.listen(options.port, options.host)
             .onSuccess { startPromise?.tryComplete() }
@@ -24,9 +25,14 @@ class WebVerticle : AbstractVerticle() {
         context.put(internalCoroutineScope)
 
         val t=TemplateEngine()
-
-
-
+*/
+        startPromise?.tryComplete()
+        vertx.eventBus().consumer<String>("awsl"){msg->
+            println("start: ${msg.body()}")
+            vertx.setTimer(5000){
+                println(msg.body())
+            }
+        }
 
     }
 

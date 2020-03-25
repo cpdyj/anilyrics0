@@ -1,6 +1,7 @@
 package name.utau.anilyrics
 
 
+import kotlinx.coroutines.*
 import java.io.File
 import java.util.LinkedList
 import kotlin.Comparator
@@ -111,9 +112,10 @@ class HiraganaTagger {
             return string.toString()
         }
     }
+
+    data class Segment(val range: IntRange, val hiragana: String)
 }
 
-data class Segment(val range: IntRange, val hiragana: String)
 
 private val hiragana = mapOf(
     'a' to "あいうえお",
@@ -160,6 +162,7 @@ private val gana2pron = mutableMapOf<Char, Char>().apply {
 
 
 fun main() {
+
     val text =
         File("\"C:\\Users\\iseki\\Documents\\ibus-replace-with-kanji\\dic\\restrained.dic\"".removeSurrounding("\"")).readLines()
             .filterNot { it.startsWith("#") or it.startsWith(";") or it.isBlank() }

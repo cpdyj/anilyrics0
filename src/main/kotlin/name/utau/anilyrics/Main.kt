@@ -18,6 +18,9 @@ fun main(vararg args:String){
     vertx.deployVerticle(WebVerticle(), deploymentOptionsOf(config = WebVerticleOptions().let { JsonObject.mapFrom(it) })){
         println(it)
     }
+    repeat(10){
+        vertx.eventBus().send("awsl","awsl*$it", deliveryOptionsOf())
+    }
 
 }
 
